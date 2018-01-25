@@ -93,7 +93,7 @@ class ProductFinder {
     }
 
     maxPrice() {
-        return this.repository.map(p => p.price).reduce((a,b) => Math.max(a,b))
+        return this.repository.map(p => p.price).reduce((currentMaxPrice, price) => Math.max(currentMaxPrice, price));
     }
 
     mostExpensiveProduct() {
@@ -106,11 +106,11 @@ class ProductFinder {
     }
 
     productsOrderedByPriceDescending() {
-        return this.repository.sort((p1,p2) => p2.price - p1.price);;
+        return this.repository.sort((p1,p2) => p2.price - p1.price);
     }
 
     averagePrice() {
-        return this.repository.map(p=>p.price).reduce((a,b)=>a+b)/this.repository.length;
+        return this.repository.map(p=>p.price).reduce((currentTotalPrice, price) => currentTotalPrice + price)/this.repository.length;
     }
 
     productsGroupedByColor() {
