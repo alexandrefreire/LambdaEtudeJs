@@ -102,11 +102,11 @@ class ProductFinder {
     }
 
     productsOrderedByPriceAscending() {
-        return []
+        return this.repository.sort((p1,p2) => p1.price - p2.price);
     }
 
     productsOrderedByPriceDescending() {
-        return []
+        return this.repository.sort((p1,p2) => p2.price - p1.price);;
     }
 
     averagePrice() {
@@ -119,8 +119,7 @@ class ProductFinder {
             if (!colorGroups.has(color)) {
                 colorGroups.set(color, [])
             }
-            var colorGroup = colorGroups.get(color)
-            colorGroup.push(product)
+            colorGroups.get(color).push(product)
             return colorGroups;
         };
         return this.repository.reduce(groupByColor, new Map());
