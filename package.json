@@ -1,0 +1,10 @@
+{
+    "name": "Lambda-Problem-JS",
+    "version": "1.0.0",
+    "description": "Exercise to practice using lambdas.",
+    "devDependencies": {
+        "karma": "^1.3.0",
+        "karma-qunit": "^1.2.1",
+        "qunitjs": "2.1.0"
+    }
+}
