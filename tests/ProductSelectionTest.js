@@ -37,6 +37,13 @@ QUnit.assert.contains = function (collection, thing) {
     return false
 }
 
+assertArrayEquals = function(assert, orderedProducts, expected) {
+    assert.equal(orderedProducts.length, expected.length)
+    orderedProducts.forEach(product => {
+        assert.equal(product, expected.shift())
+    })
+}
+
 QUnit.test("testFindByID", function (assert) {
     var productID = "f1234"
     var foundProducts = this.finder.byID(productID)
@@ -133,20 +140,16 @@ QUnit.test("mostExpensiveProduct", function (assert) {
 
 QUnit.test("productsOrderedByPriceAscending", function (assert) {
     var orderedProducts = this.finder.productsOrderedByPriceAscending()
-    assert.equal(orderedProducts.length, 5)
+
     let expected = [ fireTruck, baseball, frisbee, barbieClassic, toyConvertible];
-    orderedProducts.forEach(product => {
-        assert.equal(product, expected.shift())
-    })
+    assertArrayEquals(assert, orderedProducts, expected);
 })
 
 QUnit.test("productsOrderedByPriceDescending", function (assert) {
     var orderedProducts = this.finder.productsOrderedByPriceDescending()
-    assert.equal(orderedProducts.length, 5)
+
     var expected = [toyConvertible, barbieClassic, frisbee, fireTruck, baseball];
-    orderedProducts.forEach(product => {
-        assert.equal(product, expected.shift())
-    })
+    assertArrayEquals(assert, orderedProducts, expected);
 })
 
 QUnit.test("productsGroupedByColor", function (assert) {
@@ -159,7 +162,7 @@ QUnit.test("productsGroupedByColor", function (assert) {
     assert.deepEqual(colorGroups.get(Color.yellow), [barbieClassic])
 })
 
-QUnit.skip("listOfAllProductNamesOrderedAlphabetically", function (assert) {
+QUnit.test("listOfAllProductNamesOrderedAlphabetically", function (assert) {
     var names = ["Barbie Classic", "Baseball", "Fire Truck", "Frisbee", "Toy Porsche Convertible"]
-    assert.deepEqual(this.finder.ProductNamesOrderedAlphabetically(), names)
+    assert.deepEqual(this.finder.productNamesOrderedAlphabetically(), names)
 })

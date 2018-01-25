@@ -126,7 +126,7 @@ class ProductFinder {
     }
 
     productNamesOrderedAlphabetically() {
-        return []
+        return this.repository.map(p => p.name).sort()
     }
 
 }
